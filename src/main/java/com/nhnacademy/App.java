@@ -32,8 +32,8 @@ public class App
             thread.join();
         }
         catch(InterruptedException e) {
-            log.debug("Application exit!");
             log.debug("thread-state:{}",thread.getState());
         }
+        log.debug("Application exit!");
     }
 }
