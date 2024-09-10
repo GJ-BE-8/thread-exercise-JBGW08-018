@@ -24,11 +24,11 @@ public class SharedCounter {
 
     public SharedCounter(long count) {
         if(count <0){
-            throw new IllegalArgumentException("count > 0 ");
+            throw new IllegalArgumentException("count < 0 ");
         }
         this.count = count;
         //TODO#1-1 semaphore를 생성 합니다.( 동시에 하나의 Thread만 접근할 수 있습니다. ), permits prameter를 확인하세요.
-        semaphore = null;
+        semaphore = new Semaphore((int)this.count);
     }
 
     public long getCount(){
@@ -38,7 +38,14 @@ public class SharedCounter {
             semaphore.release()를 호출하여
             허가를 반환 합니다.
          */
-
+        try
+        {
+            semaphore.acquire();
+        }catch(InterruptedException e)
+        {
+            throw new RuntimeException();
+        }
+        semaphore.release();
         return count;
     }
 
@@ -46,6 +53,14 @@ public class SharedCounter {
         /* TODO#1-3 count = count + 1 증가시키고 count를 반환 합니다.
            1-2 처럼 semaphore를 이용해서 동기화할 수 있도록 구현 합니다.
         */
+        try
+        {
+            semaphore.acquire();
+        }catch(InterruptedException e)
+        {
+            throw new RuntimeException();
+        }
+        semaphore.release();
         count = count + 1;
         return count;
     }
@@ -54,6 +69,14 @@ public class SharedCounter {
         /*TODO#1-4 count = count-1 감소시키고 count를 반환 합니다.
           1-2 처럼 semaphore를 이용해서 동기화할 수 있도록 구현 합니다.
         */
+        try
+        {
+            semaphore.acquire();
+        }catch(InterruptedException e)
+        {
+            throw new RuntimeException();
+        }
+        semaphore.release();
         count = count - 1;
         return count;
     }
