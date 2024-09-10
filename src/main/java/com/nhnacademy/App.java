@@ -35,6 +35,6 @@ public class App
         threadA.start();
         //TODO#8 threadB를 시작 합니다.
         threadB.start();
-        
+
     }
 }
