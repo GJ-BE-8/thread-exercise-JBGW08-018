@@ -65,7 +65,6 @@ public class App
         {
             Thread.currentThread().interrupt();
         }
-
         log.debug("threadB-state:{}",threadB.getState());
         //TODO#11 'Application exit!' message를 출력 합니다.
         log.info("Application exit!");
