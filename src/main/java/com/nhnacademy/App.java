@@ -49,10 +49,9 @@ public class App
             threadA.join();
         }catch(InterruptedException e)
         {
-            log.debug("threadA-state:{}",threadA.getState());
             Thread.currentThread().interrupt();
         }
-
+        log.debug("threadA-state:{}",threadA.getState());
 
 
         //TODO#9 threadB를 시작 합니다.
@@ -64,11 +63,10 @@ public class App
         }
         catch(InterruptedException e)
         {
-            log.debug("threadB-state:{}",threadB.getState());
             Thread.currentThread().interrupt();
         }
 
-
+        log.debug("threadB-state:{}",threadB.getState());
         //TODO#11 'Application exit!' message를 출력 합니다.
         log.info("Application exit!");
     }
