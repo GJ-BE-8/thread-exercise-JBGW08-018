@@ -25,10 +25,10 @@ public class App
 
         //TODO#1 shardCounter 객체를 0으로 초기화 합니다.
         SharedCounter sharedCounter = null;
-
+        sharedCounter= new SharedCounter(0);
         //TODO#2 counterIncreaseHandler 객체를 생성 합니다.
         CounterIncreaseHandler counterIncreaseHandler = null;
-
+        counterIncreaseHandler= new CounterIncreaseHandler();
         //TODO#3 counterIncreaseHandler를 이용해서 threadA를 생성 합니다.
         Thread threadA = null;
 
