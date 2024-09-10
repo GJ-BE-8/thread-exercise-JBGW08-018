@@ -25,12 +25,12 @@ public class App
     //TODO#1 monitor로 사용한 객체를 생성 합니다.
     public static Object monitor;
 
-    public static void main( String[] args )
+    public static void main( String[] args ) throws InterruptedException
     {
 
         //TODO#2 counterHandlerA 객체를 생성 합니다. countMaxSize : 10, monitor
         CounterHandler counterHandlerA = null;
-
+        counterHandlerA = new CounterHandler(10,monitor);
         //threadA 생성시 counterHandlerA 객체를 paramter로 전달 합니다.
         Thread threadA = new Thread(counterHandlerA);
 
