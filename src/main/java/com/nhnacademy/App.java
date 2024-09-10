@@ -53,7 +53,6 @@ public class App
         }
         log.debug("threadA-state:{}",threadA.getState());
 
-
         //TODO#9 threadB를 시작 합니다.
         threadB.start();
         //TODO#10 threadB 작업이 완료될 때까지 main Thread는 대기 합니다.
