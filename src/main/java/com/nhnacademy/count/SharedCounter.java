@@ -17,7 +17,10 @@ import java.util.concurrent.Semaphore;
 public class SharedCounter {
     private long count;
     private Semaphore semaphore;
-
+    public SharedCounter()
+    {
+        this.count=0l;
+    }
     public SharedCounter(long count) {
         if(count <0){
             throw new IllegalArgumentException("count < 0 ");
