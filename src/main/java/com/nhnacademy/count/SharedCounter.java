@@ -24,13 +24,13 @@ public class SharedCounter {
 
     public SharedCounter(long count) {
         if(count <0){
-            throw new IllegalArgumentException("count > 0 ");
+            throw new IllegalArgumentException("count < 0 ");
         }
         this.count = count;
         /*TODO#1-1 ReentrantLock 생성 합니다.( mutex는 동시에 하나의 Thread만 접근할 수 있습니다. )
            ReentrantLock은 기본적으로 비공정한 락 입니다. 공정성을 보장 하도록 초기화 합니다.
          */
-        mutex=new ReentrantLock();
+        mutex=new ReentrantLock(true);
     }
 
     public long getCount(){
@@ -41,9 +41,15 @@ public class SharedCounter {
             잠금을 해제 합니다. 뮤텍스는 lock을 건 쓰레드만 lock을 해제할 수 있습니다.
          */
         mutex.lock();
+        try
+        {
+            return count;
+        }finally
+        {
+            mutex.unlock();
+        }
 
-        mutex.unlock();
-        return count;
+
 
     }
 
@@ -52,9 +58,14 @@ public class SharedCounter {
            1-2 처럼 mutex를 이용해서 동기화 될 수 있도록 구현 합니다.
         */
         mutex.lock();
-        count = count + 1;
-        mutex.unlock();
-        return count;
+        try
+        {
+            return ++count;
+        }finally
+        {
+            mutex.unlock();
+        }
+
     }
 
     public long decreaseAndGet(){
@@ -62,8 +73,13 @@ public class SharedCounter {
           1-2 처럼 mutex를 이용해서 동기화 될 수 있도록 구현 합니다.
         */
         mutex.lock();
-        count = count - 1;
-        mutex.unlock();
-        return count;
+        try
+        {
+            return --count;
+        }finally
+        {
+            mutex.unlock();
+        }
+
     }
 }
