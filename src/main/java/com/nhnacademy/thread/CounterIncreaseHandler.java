@@ -33,15 +33,18 @@ public class CounterIncreaseHandler implements Runnable {
     public void run() {
         //현제 Thread의 interrupted이 ture <--  while의 종료조건 : interrupt가 발생 했다면 종료 합니다.
         while(!Thread.currentThread().isInterrupted()) {
-            try {
-                Thread.sleep(1000);
-                //sharedCounter의 count를 1증가 시키고 count값을 반환 합니다.
-                long count = sharedCounter.increaseAndGet();
-                log.debug("thread:{}, count:{}", Thread.currentThread().getName(), count);
-            } catch (Exception e) {
-                log.debug("{} - interrupt!",Thread.currentThread().getName());
-                //현제 Thread에 interrupt()를 호출하여 interrput()를 발생 시킵 니다. 즉 현제 Thread의 interrupted 값이 -> true로 변경 됩니다. -> 즉 while 문을 종료하게 됩니다.
-                Thread.currentThread().interrupt();
+            synchronized(Thread.currentThread())
+            {
+                try {
+                    Thread.sleep(1000);
+                    //sharedCounter의 count를 1증가 시키고 count값을 반환 합니다.
+                    long count = sharedCounter.increaseAndGet();
+                    log.debug("thread:{}, count:{}", Thread.currentThread().getName(), count);
+                } catch (Exception e) {
+                    log.debug("{} - interrupt!",Thread.currentThread().getName());
+                    //현제 Thread에 interrupt()를 호출하여 interrput()를 발생 시킵 니다. 즉 현제 Thread의 interrupted 값이 -> true로 변경 됩니다. -> 즉 while 문을 종료하게 됩니다.
+                    Thread.currentThread().interrupt();
+                }
             }
         }
     }
