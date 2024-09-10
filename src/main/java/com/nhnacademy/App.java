@@ -35,5 +35,6 @@ public class App
             log.debug("thread-state:{}",thread.getState());
         }
         log.debug("Application exit!");
+        log.debug("thread-state: {}",thread.getState());
     }
 }
